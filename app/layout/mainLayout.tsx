@@ -10,7 +10,7 @@ export default function MainLayout({ children }: LayoutProps) {
   return (
     <main className="min-h-screen flex flex-col bg-[var(--voodoo-black)]">
       {/* Header */}
-      {/*<NavBar />*/}
+      <NavBar />
 
       {/* Main Content */}
       <section className="flex-1 flex justify-center align-center p-4">
@@ -18,7 +18,7 @@ export default function MainLayout({ children }: LayoutProps) {
       </section>
 
       {/* Footer */}
-      {/*<Footer />*/}
+      <Footer />
     </main>
   );
 }

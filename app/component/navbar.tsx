@@ -8,13 +8,15 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { NAVIGATION } from "~/lib/constants";
+import { NAVIGATION, SHOP_URL } from "~/lib/constants";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function NavBar() {
+  const shopIsDisabled = SHOP_URL === "";
+
   return (
     <Disclosure
       as="nav"
@@ -67,8 +69,8 @@ export default function NavBar() {
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             <a
-              href="/"
-              className="relative rounded-full p-1 text-gray-400 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-[var(--voodoo-purple)]"
+              href={shopIsDisabled ? undefined : SHOP_URL}
+              className={`${shopIsDisabled ? "text-gray-200/5" : "hover:text-white text-gray-400"} relative rounded-full p-1 focus:outline-2 focus:outline-offset-2 focus:outline-[var(--voodoo-purple)]`}
             >
               <span className="absolute -inset-1.5" />
               <span className="sr-only">Navigate to shop</span>
