@@ -3,7 +3,7 @@ import Footer from "~/component/footer";
 import NavBar from "~/component/navbar";
 
 interface LayoutProps {
-  children: ReactNode;
+	children: ReactNode;
 }
 
 export default function MainLayout({ children }: LayoutProps) {
@@ -12,10 +12,8 @@ export default function MainLayout({ children }: LayoutProps) {
       {/* Header */}
       <NavBar />
 
-      {/* Main Content */}
-      <section className="flex-1 flex justify-center align-center p-4">
-        {children}
-      </section>
+			{/* Main Content */}
+			<section className="flex-1 flex justify-center align-center p-4">{children}</section>
 
       {/* Footer */}
       <Footer />
