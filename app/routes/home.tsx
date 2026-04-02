@@ -1,6 +1,7 @@
 import type { Route } from "./+types/home";
-import { ComingSoon } from "../content/welcome/comingSoon";
 import MainLayout from "~/layout/mainLayout";
+import Hero from "~/component/hero";
+import BentoBox from "~/component/bentoBox";
 
 export function meta({}: Route.MetaArgs) {
 	return [
@@ -11,8 +12,9 @@ export function meta({}: Route.MetaArgs) {
 
 export default function Home() {
 	return (
-		<MainLayout>
-			<ComingSoon />
+		<MainLayout includePadding={false}>
+			<Hero />
+			<BentoBox />
 		</MainLayout>
 	);
 }

@@ -1,24 +1,139 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans:
-    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--font-sans:
+		"Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+		"Segoe UI Symbol", "Noto Color Emoji";
 }
 
 :root {
-  --voodoo-black: #020403;
-  --voodoo-white: #fafafa;
-  --voodoo-white-1: rgba(250, 250, 250, 0.1);
-  --voodoo-purple: #6d2895;
-  --voodoo-purple-05: rgba(109, 40, 149, 0.05);
+	--voodoo-black: #020403;
+	--voodoo-white: #fafafa;
+	--voodoo-white-1: rgba(250, 250, 250, 0.1);
+	--voodoo-purple: #6d2895;
+	--voodoo-purple-05: rgba(109, 40, 149, 0.05);
+	--voodoo-purple-25: rgba(109, 40, 149, 0.25);
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+	@apply bg-white dark:bg-gray-950;
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+	@media (prefers-color-scheme: dark) {
+		color-scheme: dark;
+	}
+}
+
+.shadow {
+	box-shadow: 0 0 15px var(--voodoo-purple-25);
+}
+
+.stat-card-bg {
+	position: relative;
+	overflow: hidden;
+	border: 1px solid var(--voodoo-purple-25);
+}
+
+.stat-card-bg::before {
+	/* flowing purple silk pattern */
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: conic-gradient(
+		from 180deg at 50% 50%,
+		rgba(109, 40, 149, 0.3),
+		transparent 45%,
+		rgba(109, 40, 149, 0.3),
+		transparent
+	);
+	mix-blend-mode: screen;
+	filter: blur(12px);
+}
+
+.stat-card-bg::after {
+	/* subtle gradient streak */
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(120deg, rgba(109, 40, 149, 0.1), transparent 60%);
+	opacity: 0.7;
+}
+
+/* Burlap and Hypnotic */
+.burlap-hypnotism {
+	position: absolute;
+	inset: 0;
+
+	background:
+    /* fibers */
+		repeating-linear-gradient(0deg, rgba(80, 65, 50, 0.5) 0 1px, transparent 1px 3px),
+		repeating-linear-gradient(90deg, rgba(80, 65, 50, 0.5) 0 1px, transparent 1px 3px),
+		/* random flecks */ /* repeating flecks */
+			repeating-radial-gradient(circle, rgba(20, 15, 10, 0.25) 0 2px, transparent 2px 30px),
+		/* base tone */ var(--voodoo-purple-25);
+
+	background-blend-mode: multiply;
+	opacity: 1;
+	filter: contrast(1.1) brightness(0.95);
+}
+
+.stitched {
+	position: absolute;
+	inset: 0;
+
+	background:
+
+    /* 🪡 X-stitch pattern (diagonal crossing threads) */
+		repeating-linear-gradient(45deg, rgba(20, 15, 10, 0.25) 0 2px, transparent 2px 30px),
+		repeating-linear-gradient(-45deg, rgba(20, 15, 10, 0.25) 0 2px, transparent 2px 30px),
+		/* fibers */
+			repeating-linear-gradient(0deg, rgba(80, 65, 50, 0.5) 0 1px, transparent 1px 3px),
+		repeating-linear-gradient(90deg, rgba(80, 65, 50, 0.5) 0 1px, transparent 1px 3px),
+		/* Cloth base tone */ var(--voodoo-purple-25);
+
+	background-blend-mode: multiply;
+	opacity: 1;
+	filter: contrast(1.1) brightness(0.95);
+}
+
+.fabric {
+	position: absolute;
+	inset: 0;
+
+	background:
+		/* 🧶 finer thread crossing */
+		repeating-linear-gradient(12deg, rgba(20, 15, 10, 0.25) 0 2px, transparent 2px 8px),
+		repeating-linear-gradient(-12deg, rgba(20, 15, 10, 0.25) 0 2px, transparent 2px 8px),
+		/* 🌾 rough fibers */
+			repeating-linear-gradient(0deg, rgba(80, 65, 50, 0.5) 0 1px, transparent 1px 3px),
+		repeating-linear-gradient(90deg, rgba(80, 65, 50, 0.5) 0 1px, transparent 1px 3px),
+		/* cloth/purple tint base */ var(--voodoo-purple-25);
+
+	background-blend-mode: multiply;
+	opacity: 1;
+	filter: contrast(1.1) brightness(0.95);
+}
+
+/* vignette */
+.stat-card-vignette {
+	position: absolute;
+	inset: 0;
+	background: linear-gradient(to bottom, transparent, black 90%);
+	opacity: 0.8;
+}
+
+.voodoo-pulse {
+	animation: auraPulse 9s ease-in-out infinite;
+}
+
+@keyframes auraPulse {
+	0%,
+	100% {
+		opacity: 0.95;
+		filter: brightness(0.96);
+	}
+	50% {
+		opacity: 1;
+		filter: brightness(1.05);
+	}
 }
