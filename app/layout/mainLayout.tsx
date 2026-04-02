@@ -9,17 +9,14 @@ interface LayoutProps {
 
 export default function MainLayout({ children, includePadding = true }: LayoutProps) {
 	return (
-		<main className="min-h-screen flex flex-col bg-[var(--voodoo-black)]">
-			{/* Header */}
+		<main className="min-h-screen bg-[var(--voodoo-black)] text-white">
 			<NavBar />
 
-			{/* Main Content */}
 			<section
-				className={`flex-1 flex flex-col justify-center align-center ${includePadding ? "p-4" : ""}`}>
+				className={`flex min-h-[calc(100vh-72px)] flex-col ${includePadding ? "p-4" : ""}`}>
 				{children}
 			</section>
 
-			{/* Footer */}
 			<Footer />
 		</main>
 	);

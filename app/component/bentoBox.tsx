@@ -1,46 +1,47 @@
 export default function BentoBox() {
 	return (
-		<div className="p-4 md:p-8">
-			<section className="grid grid-cols-1 grid-rows-5 md:grid-cols-3 md:grid-rows-1 gap-2">
-				<BentoBoxStatCard
-					title={5}
-					value="KOs"
-					colSpan={1}
-					rowSpan={2}
-					valueClass="text-[var(--voodoo-purple)]"
-					background={bentoPatterns.burlap}
-				/>
-				<BentoBoxStatCard
-					title={5}
-					value="Wins"
-					colSpan={1}
-					rowSpan={2}
-					valueClass="text-green-500"
-					background={bentoPatterns.fabric}
-				/>
-				<BentoBoxStatCard
-					title={0}
-					value="Losses"
-					colSpan={1}
-					rowSpan={1}
-					valueClass="text-[var(--voodoo-white)]"
-					background={bentoPatterns.stitch}
-				/>
+		<div className="px-4 py-8 md:px-8 md:py-12">
+			<section
+				id="team"
+				className="mx-auto grid max-w-7xl grid-cols-1 gap-3 md:grid-cols-3 md:grid-rows-2">
 				<BentoBoxInfoCard
-					title={"Professional Boxer, USMC Infantry Veteran, Graduate Student"}
-					value="Something something something..."
+					eyebrow="Service"
+					title="United States Marine Corps Infantry Veteran"
+					value="A foundation built on resilience, accountability, discipline, and performance when the pressure is highest."
 					colSpan={2}
 					rowSpan={1}
-					valueClass="text-gray-300"
-					background={bentoPatterns.fabric}
+					valueClass="text-gray-200"
+					background={BentoPatterns.stitch}
 				/>
+
 				<BentoBoxInfoCard
-					title={"Core Value or something"}
-					value="Something something something, Something something something, Something something something..."
+					eyebrow="Instruction"
+					title="NRA Certified Firearms Instructor"
+					value="Professional instruction rooted in safety, responsibility, technical skill, and real-world experience."
 					colSpan={1}
 					rowSpan={1}
-					valueClass="text-gray-300"
-					background={bentoPatterns.burlap}
+					valueClass="text-gray-200"
+					background={BentoPatterns.fabric}
+				/>
+
+				<BentoBoxInfoCard
+					eyebrow="Leadership"
+					title="President, Hofstra Student Veterans Association"
+					value="Leading by example through advocacy, representation, and a commitment to building strong communities."
+					colSpan={1}
+					rowSpan={1}
+					valueClass="text-gray-200"
+					background={BentoPatterns.burlap}
+				/>
+
+				<BentoBoxInfoCard
+					eyebrow="Mission"
+					title="Clinical Rehabilitation in Mental Health Counseling, MS"
+					value="A purpose that extends beyond competition through mental health leadership, growth, service, and impact."
+					colSpan={2}
+					rowSpan={1}
+					valueClass="text-gray-200"
+					background={BentoPatterns.fabric}
 				/>
 			</section>
 		</div>
@@ -48,15 +49,16 @@ export default function BentoBox() {
 }
 
 interface BentoBoxCardProps {
+	eyebrow?: string;
 	title?: number | string;
 	value?: number | string;
 	valueClass?: string;
 	colSpan: number;
 	rowSpan: number;
-	background: bentoPatterns;
+	background: BentoPatterns;
 }
 
-enum bentoPatterns {
+enum BentoPatterns {
 	burlap = "burlap-hypnotism",
 	fabric = "fabric",
 	stitch = "stitched",
@@ -68,15 +70,18 @@ function getSpanClasses(col: number, row: number) {
 		2: "md:col-span-2",
 		3: "md:col-span-3",
 	};
+
 	const rowMap: Record<number, string> = {
 		1: "md:row-span-1",
 		2: "md:row-span-2",
 		3: "md:row-span-3",
 	};
+
 	return `${colMap[col]} ${rowMap[row]}`;
 }
 
 function BentoBoxStatCard({
+	eyebrow,
 	title,
 	value,
 	valueClass,
@@ -86,11 +91,26 @@ function BentoBoxStatCard({
 }: BentoBoxCardProps) {
 	return (
 		<div
-			className={`p-8 sm:p-12 lg:p-24 rounded-2xl ${getSpanClasses(colSpan, rowSpan)} flex flex-col justify-center items-center stat-card-bg shadow voodoo-pulse hover:bg-zinc-900/15`}>
+			className={`${getSpanClasses(colSpan, rowSpan)} stat-card-bg shadow voodoo-pulse relative flex min-h-[220px] flex-col items-center justify-center overflow-hidden rounded-2xl p-8 text-center`}>
+			{eyebrow ? (
+				<p className="z-10 mb-3 text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-400">
+					{eyebrow}
+				</p>
+			) : null}
+
 			{(title || title === 0) && (
-				<h3 className="text-5xl font-bold text-[var(--voodoo-white)] z-1">{title}</h3>
+				<h3 className="z-10 text-5xl font-bold tracking-tight text-[var(--voodoo-white)] md:text-6xl">
+					{title}
+				</h3>
 			)}
-			{value && <span className={`text-xl font-bold z-1 ${valueClass}`}>{value}</span>}
+
+			{value && (
+				<span
+					className={`z-10 mt-3 text-sm font-semibold uppercase tracking-[0.2em] ${valueClass}`}>
+					{value}
+				</span>
+			)}
+
 			<div className={background}></div>
 			<div className="stat-card-vignette"></div>
 		</div>
@@ -98,6 +118,7 @@ function BentoBoxStatCard({
 }
 
 function BentoBoxInfoCard({
+	eyebrow,
 	title,
 	value,
 	valueClass,
@@ -107,11 +128,26 @@ function BentoBoxInfoCard({
 }: BentoBoxCardProps) {
 	return (
 		<div
-			className={`p-8 sm:p-12 lg:p-16 rounded-2xl ${getSpanClasses(colSpan, rowSpan)} flex flex-col stat-card-bg shadow voodoo-pulse hover:bg-zinc-900/15`}>
-			{(title || title === 0) && (
-				<h3 className="text-2xl font-bold text-[var(--voodoo-white)] z-1">{title}</h3>
+			className={`${getSpanClasses(colSpan, rowSpan)} stat-card-bg shadow voodoo-pulse relative flex min-h-[240px] flex-col overflow-hidden rounded-2xl p-8 sm:p-10`}>
+			{eyebrow ? (
+				<p className="z-10 text-[11px] font-semibold uppercase tracking-[0.24em] text-gray-400">
+					{eyebrow}
+				</p>
+			) : null}
+
+			{title || title === 0 ? (
+				<h3 className="z-10 mt-3 text-2xl font-bold leading-tight tracking-tight text-[var(--voodoo-white)]">
+					{title}
+				</h3>
+			) : null}
+
+			{value && (
+				<span
+					className={`z-10 mt-4 max-w-xl text-sm leading-7 ${valueClass ?? "text-gray-200"}`}>
+					{value}
+				</span>
 			)}
-			{value && <span className={`text-sm z-1 ${valueClass}`}>{value}</span>}
+
 			<div className={background}></div>
 			<div className="stat-card-vignette"></div>
 		</div>

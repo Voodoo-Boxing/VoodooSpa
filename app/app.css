@@ -12,7 +12,15 @@
 	--voodoo-white-1: rgba(250, 250, 250, 0.1);
 	--voodoo-purple: #6d2895;
 	--voodoo-purple-05: rgba(109, 40, 149, 0.05);
+	--voodoo-purple-12: rgba(109, 40, 149, 0.12);
+	--voodoo-purple-18: rgba(109, 40, 149, 0.18);
 	--voodoo-purple-25: rgba(109, 40, 149, 0.25);
+	--voodoo-gold: rgba(210, 168, 92, 0.22);
+	--voodoo-red: rgba(120, 24, 36, 0.16);
+}
+
+html {
+	scroll-behavior: smooth;
 }
 
 html,
@@ -24,102 +32,119 @@ body {
 	}
 }
 
+body {
+	background: var(--voodoo-black);
+	color: var(--voodoo-white);
+}
+
 .shadow {
-	box-shadow: 0 0 15px var(--voodoo-purple-25);
+	box-shadow:
+		0 0 0 1px rgba(255, 255, 255, 0.03),
+		0 0 24px rgba(109, 40, 149, 0.14),
+		0 18px 60px rgba(0, 0, 0, 0.45);
 }
 
 .stat-card-bg {
 	position: relative;
 	overflow: hidden;
-	border: 1px solid var(--voodoo-purple-25);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	background:
+		linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
+		linear-gradient(135deg, rgba(109, 40, 149, 0.04), rgba(0, 0, 0, 0.08));
+	isolation: isolate;
 }
 
 .stat-card-bg::before {
-	/* flowing purple silk pattern */
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: conic-gradient(
-		from 180deg at 50% 50%,
-		rgba(109, 40, 149, 0.3),
-		transparent 45%,
-		rgba(109, 40, 149, 0.3),
-		transparent
-	);
-	mix-blend-mode: screen;
-	filter: blur(12px);
+	background:
+		radial-gradient(circle at 18% 20%, rgba(109, 40, 149, 0.2), transparent 30%),
+		radial-gradient(circle at 80% 22%, rgba(255, 255, 255, 0.03), transparent 24%),
+		radial-gradient(circle at 50% 120%, rgba(0, 0, 0, 0.38), transparent 55%);
+	opacity: 0.95;
+	pointer-events: none;
 }
 
 .stat-card-bg::after {
-	/* subtle gradient streak */
 	content: "";
 	position: absolute;
 	inset: 0;
-	background: linear-gradient(120deg, rgba(109, 40, 149, 0.1), transparent 60%);
-	opacity: 0.7;
+	background:
+		linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.035) 48%, transparent 56%),
+		linear-gradient(to bottom, transparent 55%, rgba(0, 0, 0, 0.28) 100%);
+	opacity: 0.8;
+	mix-blend-mode: screen;
+	pointer-events: none;
 }
 
-/* Burlap and Hypnotic */
+/* Ritual smoke / aura */
 .burlap-hypnotism {
 	position: absolute;
 	inset: 0;
-
 	background:
-    /* fibers */
-		repeating-linear-gradient(0deg, rgba(80, 65, 50, 0.5) 0 1px, transparent 1px 3px),
-		repeating-linear-gradient(90deg, rgba(80, 65, 50, 0.5) 0 1px, transparent 1px 3px),
-		/* random flecks */ /* repeating flecks */
-			repeating-radial-gradient(circle, rgba(20, 15, 10, 0.25) 0 2px, transparent 2px 30px),
-		/* base tone */ var(--voodoo-purple-25);
-
-	background-blend-mode: multiply;
+		radial-gradient(circle at 20% 25%, rgba(109, 40, 149, 0.32), transparent 24%),
+		radial-gradient(circle at 78% 30%, rgba(210, 168, 92, 0.1), transparent 18%),
+		radial-gradient(circle at 50% 70%, rgba(109, 40, 149, 0.12), transparent 42%),
+		radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px 100%),
+		repeating-radial-gradient(
+			circle at 50% 50%,
+			rgba(109, 40, 149, 0.075) 0 2px,
+			transparent 2px 28px
+		),
+		linear-gradient(135deg, rgba(4, 4, 6, 0.82), rgba(18, 10, 26, 0.92));
+	filter: contrast(1.08) brightness(1.02);
 	opacity: 1;
-	filter: contrast(1.1) brightness(0.95);
 }
 
+/* Scarred steel / impact lines */
 .stitched {
 	position: absolute;
 	inset: 0;
-
 	background:
-
-    /* 🪡 X-stitch pattern (diagonal crossing threads) */
-		repeating-linear-gradient(45deg, rgba(20, 15, 10, 0.25) 0 2px, transparent 2px 30px),
-		repeating-linear-gradient(-45deg, rgba(20, 15, 10, 0.25) 0 2px, transparent 2px 30px),
-		/* fibers */
-			repeating-linear-gradient(0deg, rgba(80, 65, 50, 0.5) 0 1px, transparent 1px 3px),
-		repeating-linear-gradient(90deg, rgba(80, 65, 50, 0.5) 0 1px, transparent 1px 3px),
-		/* Cloth base tone */ var(--voodoo-purple-25);
-
-	background-blend-mode: multiply;
+		linear-gradient(135deg, rgba(255, 255, 255, 0.035), transparent 30%),
+		repeating-linear-gradient(125deg, rgba(255, 255, 255, 0.028) 0 2px, transparent 2px 22px),
+		repeating-linear-gradient(-125deg, rgba(0, 0, 0, 0.16) 0 3px, transparent 3px 28px),
+		radial-gradient(circle at 82% 18%, rgba(109, 40, 149, 0.2), transparent 24%),
+		radial-gradient(circle at 18% 82%, rgba(120, 24, 36, 0.16), transparent 22%),
+		linear-gradient(145deg, rgba(12, 12, 14, 0.95), rgba(28, 28, 32, 0.92));
+	filter: saturate(1.05) contrast(1.05);
 	opacity: 1;
-	filter: contrast(1.1) brightness(0.95);
 }
 
+/* Premium occult geometry / disciplined energy */
 .fabric {
 	position: absolute;
 	inset: 0;
-
 	background:
-		/* 🧶 finer thread crossing */
-		repeating-linear-gradient(12deg, rgba(20, 15, 10, 0.25) 0 2px, transparent 2px 8px),
-		repeating-linear-gradient(-12deg, rgba(20, 15, 10, 0.25) 0 2px, transparent 2px 8px),
-		/* 🌾 rough fibers */
-			repeating-linear-gradient(0deg, rgba(80, 65, 50, 0.5) 0 1px, transparent 1px 3px),
-		repeating-linear-gradient(90deg, rgba(80, 65, 50, 0.5) 0 1px, transparent 1px 3px),
-		/* cloth/purple tint base */ var(--voodoo-purple-25);
-
-	background-blend-mode: multiply;
+		linear-gradient(135deg, rgba(255, 255, 255, 0.025), transparent 34%),
+		repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 30px),
+		repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.018) 0 1px, transparent 1px 30px),
+		radial-gradient(circle at 50% 50%, rgba(109, 40, 149, 0.12), transparent 42%),
+		radial-gradient(circle at 50% 50%, rgba(210, 168, 92, 0.06) 0 1px, transparent 1px 100%),
+		repeating-radial-gradient(
+			circle at 50% 50%,
+			rgba(210, 168, 92, 0.04) 0 1px,
+			transparent 1px 18px
+		),
+		linear-gradient(145deg, rgba(8, 8, 10, 0.96), rgba(24, 14, 34, 0.9));
+	filter: contrast(1.08) brightness(1.01);
 	opacity: 1;
-	filter: contrast(1.1) brightness(0.95);
 }
 
-/* vignette */
 .stat-card-vignette {
 	position: absolute;
 	inset: 0;
-	background: linear-gradient(to bottom, transparent, black 90%);
-	opacity: 0.8;
+	background:
+		radial-gradient(
+			circle at 50% 15%,
+			transparent 0%,
+			transparent 35%,
+			rgba(0, 0, 0, 0.18) 70%
+		),
+		linear-gradient(to bottom, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.72) 100%);
+	opacity: 0.95;
+	pointer-events: none;
 }
 
 .voodoo-pulse {
@@ -129,11 +154,11 @@ body {
 @keyframes auraPulse {
 	0%,
 	100% {
-		opacity: 0.95;
-		filter: brightness(0.96);
+		opacity: 0.96;
+		filter: brightness(0.98);
 	}
 	50% {
 		opacity: 1;
-		filter: brightness(1.05);
+		filter: brightness(1.04);
 	}
 }
